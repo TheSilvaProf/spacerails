@@ -1,0 +1,885 @@
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAliens (20230128164733)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "aliens" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "age" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230128164733"]]
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-01-28 16:48:34.145101"], ["updated_at", "2023-01-28 16:48:34.145101"]]
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2023-01-28 11:49:13 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /var/lib/gems/3.1.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /var/lib/gems/3.1.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.7ms | Allocations: 585)
+Completed 200 OK in 61ms (Views: 19.1ms | ActiveRecord: 0.0ms | Allocations: 4664)
+
+
+Started GET "/Aliens" for 127.0.0.1 at 2023-01-28 11:49:26 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/Aliens"):
+  
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:50:09 -0500
+Processing by AliensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1220)
+  Rendered layout layouts/application.html.erb (Duration: 159.2ms | Allocations: 92663)
+Completed 200 OK in 163ms (Views: 160.2ms | ActiveRecord: 0.1ms | Allocations: 94416)
+
+
+Started GET "/aliens/new" for 127.0.0.1 at 2023-01-28 11:50:21 -0500
+Processing by AliensController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/new.html.erb within layouts/application
+  Rendered aliens/_form.html.erb (Duration: 10.8ms | Allocations: 4572)
+  Rendered aliens/new.html.erb within layouts/application (Duration: 11.9ms | Allocations: 4895)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | Allocations: 7218)
+Completed 200 OK in 22ms (Views: 14.6ms | ActiveRecord: 0.6ms | Allocations: 11617)
+
+
+Started POST "/aliens" for 127.0.0.1 at 2023-01-28 11:50:45 -0500
+Processing by AliensController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alien"=>{"name"=>"Bla bla bla", "age"=>"1000"}, "commit"=>"Create Alien"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+  [1m[36mAlien Create (0.3ms)[0m  [1m[32mINSERT INTO "aliens" ("name", "age", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bla bla bla"], ["age", 1000], ["created_at", "2023-01-28 16:50:45.244730"], ["updated_at", "2023-01-28 16:50:45.244730"]]
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/aliens/1
+Completed 302 Found in 10ms (ActiveRecord: 4.0ms | Allocations: 3784)
+
+
+Started GET "/aliens/1" for 127.0.0.1 at 2023-01-28 11:50:45 -0500
+Processing by AliensController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/show.html.erb within layouts/application
+  Rendered aliens/_alien.html.erb (Duration: 0.4ms | Allocations: 201)
+  Rendered aliens/show.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1527)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | Allocations: 3827)
+Completed 200 OK in 10ms (Views: 6.3ms | ActiveRecord: 0.2ms | Allocations: 6603)
+
+
+Started GET "/aliens/1/edit" for 127.0.0.1 at 2023-01-28 11:50:49 -0500
+Processing by AliensController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/edit.html.erb within layouts/application
+  Rendered aliens/_form.html.erb (Duration: 2.7ms | Allocations: 1201)
+  Rendered aliens/edit.html.erb within layouts/application (Duration: 3.9ms | Allocations: 1463)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | Allocations: 3648)
+Completed 200 OK in 10ms (Views: 7.7ms | ActiveRecord: 0.1ms | Allocations: 4532)
+
+
+Started PATCH "/aliens/1" for 127.0.0.1 at 2023-01-28 11:50:52 -0500
+Processing by AliensController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alien"=>{"name"=>"Bla bla bla", "age"=>"1000"}, "commit"=>"Update Alien", "id"=>"1"}
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+Redirected to http://127.0.0.1:3000/aliens/1
+Completed 302 Found in 5ms (ActiveRecord: 0.2ms | Allocations: 1247)
+
+
+Started GET "/aliens/1" for 127.0.0.1 at 2023-01-28 11:50:52 -0500
+Processing by AliensController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/show.html.erb within layouts/application
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/show.html.erb within layouts/application (Duration: 1.4ms | Allocations: 576)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | Allocations: 2761)
+Completed 200 OK in 7ms (Views: 5.2ms | ActiveRecord: 0.2ms | Allocations: 3498)
+
+
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:50:54 -0500
+Processing by AliensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 902)
+  Rendered layout layouts/application.html.erb (Duration: 3.5ms | Allocations: 3094)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.1ms | Allocations: 3366)
+
+
+Started GET "/aliens/new" for 127.0.0.1 at 2023-01-28 11:52:13 -0500
+Processing by AliensController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/new.html.erb within layouts/application
+  Rendered aliens/_form.html.erb (Duration: 2.2ms | Allocations: 985)
+  Rendered aliens/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1072)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | Allocations: 3264)
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms | Allocations: 3540)
+
+
+Started POST "/aliens" for 127.0.0.1 at 2023-01-28 11:52:24 -0500
+Processing by AliensController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alien"=>{"name"=>"aaaa", "age"=>"1234"}, "commit"=>"Create Alien"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+  [1m[36mAlien Create (0.3ms)[0m  [1m[32mINSERT INTO "aliens" ("name", "age", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "aaaa"], ["age", 1234], ["created_at", "2023-01-28 16:52:24.917311"], ["updated_at", "2023-01-28 16:52:24.917311"]]
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/aliens/2
+Completed 302 Found in 10ms (ActiveRecord: 4.2ms | Allocations: 2260)
+
+
+Started GET "/aliens/2" for 127.0.0.1 at 2023-01-28 11:52:24 -0500
+Processing by AliensController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/show.html.erb within layouts/application
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/show.html.erb within layouts/application (Duration: 11.6ms | Allocations: 582)
+  Rendered layout layouts/application.html.erb (Duration: 15.5ms | Allocations: 2779)
+Completed 200 OK in 18ms (Views: 16.0ms | ActiveRecord: 0.1ms | Allocations: 3513)
+
+
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:52:30 -0500
+Processing by AliensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 18)
+  Rendered aliens/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1028)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 3220)
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.1ms | Allocations: 3490)
+
+
+Started GET "/aliens/new" for 127.0.0.1 at 2023-01-28 11:52:36 -0500
+Processing by AliensController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/new.html.erb within layouts/application
+  Rendered aliens/_form.html.erb (Duration: 1.4ms | Allocations: 994)
+  Rendered aliens/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1081)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | Allocations: 3273)
+Completed 200 OK in 4ms (Views: 4.1ms | ActiveRecord: 0.0ms | Allocations: 3545)
+
+
+Started POST "/aliens" for 127.0.0.1 at 2023-01-28 11:52:45 -0500
+Processing by AliensController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alien"=>{"name"=>"bbbb", "age"=>"2345"}, "commit"=>"Create Alien"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+  [1m[36mAlien Create (0.3ms)[0m  [1m[32mINSERT INTO "aliens" ("name", "age", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "bbbb"], ["age", 2345], ["created_at", "2023-01-28 16:52:45.106497"], ["updated_at", "2023-01-28 16:52:45.106497"]]
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/aliens_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/aliens/3
+Completed 302 Found in 9ms (ActiveRecord: 4.1ms | Allocations: 2236)
+
+
+Started GET "/aliens/3" for 127.0.0.1 at 2023-01-28 11:52:45 -0500
+Processing by AliensController#show as TURBO_STREAM
+  Parameters: {"id"=>"3"}
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/show.html.erb within layouts/application
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/show.html.erb within layouts/application (Duration: 2.3ms | Allocations: 581)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 2765)
+Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.2ms | Allocations: 3499)
+
+
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:52:47 -0500
+Processing by AliensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/_alien.html.erb (Duration: 0.2ms | Allocations: 19)
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 18)
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 18)
+  Rendered aliens/index.html.erb within layouts/application (Duration: 5.1ms | Allocations: 1138)
+  Rendered layout layouts/application.html.erb (Duration: 8.9ms | Allocations: 3330)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.2ms | Allocations: 3600)
+
+
+Started GET "/aliens/1" for 127.0.0.1 at 2023-01-28 11:52:52 -0500
+Processing by AliensController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/show.html.erb within layouts/application
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/show.html.erb within layouts/application (Duration: 1.2ms | Allocations: 548)
+  Rendered layout layouts/application.html.erb (Duration: 4.9ms | Allocations: 2732)
+Completed 200 OK in 7ms (Views: 5.6ms | ActiveRecord: 0.1ms | Allocations: 3463)
+
+
+Started DELETE "/aliens/1" for 127.0.0.1 at 2023-01-28 11:52:54 -0500
+Processing by AliensController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens" WHERE "aliens"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/aliens_controller.rb:63:in `set_alien'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/aliens_controller.rb:52:in `destroy'
+  [1m[36mAlien Destroy (0.4ms)[0m  [1m[31mDELETE FROM "aliens" WHERE "aliens"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/aliens_controller.rb:52:in `destroy'
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/aliens_controller.rb:52:in `destroy'
+Redirected to http://127.0.0.1:3000/aliens
+Completed 302 Found in 11ms (ActiveRecord: 5.5ms | Allocations: 2482)
+
+
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:52:54 -0500
+Processing by AliensController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.1ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 19)
+  Rendered aliens/_alien.html.erb (Duration: 0.0ms | Allocations: 18)
+  Rendered aliens/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 1031)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | Allocations: 3226)
+Completed 200 OK in 5ms (Views: 4.5ms | ActiveRecord: 0.1ms | Allocations: 3499)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlanets (20230128165436)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "planets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230128165436"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:55:21 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AliensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/_alien.html.erb (Duration: 0.3ms | Allocations: 229)
+  Rendered aliens/_alien.html.erb (Duration: 0.0ms | Allocations: 18)
+  Rendered aliens/index.html.erb within layouts/application (Duration: 10.8ms | Allocations: 6517)
+  Rendered layout layouts/application.html.erb (Duration: 101.0ms | Allocations: 41378)
+Completed 200 OK in 106ms (Views: 101.7ms | ActiveRecord: 0.6ms | Allocations: 45128)
+
+
+Started GET "/aliens" for 127.0.0.1 at 2023-01-28 11:55:25 -0500
+Processing by AliensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering aliens/index.html.erb within layouts/application
+  [1m[36mAlien Load (0.2ms)[0m  [1m[34mSELECT "aliens".* FROM "aliens"[0m
+  ↳ app/views/aliens/index.html.erb:6
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 25)
+  Rendered aliens/_alien.html.erb (Duration: 0.1ms | Allocations: 18)
+  Rendered aliens/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 1169)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | Allocations: 3486)
+Completed 200 OK in 9ms (Views: 8.1ms | ActiveRecord: 0.2ms | Allocations: 3829)
+
+
+Started GET "/planetas" for 127.0.0.1 at 2023-01-28 11:55:47 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/planetas"):
+  
+Started GET "/planets" for 127.0.0.1 at 2023-01-28 11:55:55 -0500
+Processing by PlanetsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering planets/index.html.erb within layouts/application
+  [1m[36mPlanet Load (0.2ms)[0m  [1m[34mSELECT "planets".* FROM "planets"[0m
+  ↳ app/views/planets/index.html.erb:6
+  Rendered planets/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1248)
+  Rendered layout layouts/application.html.erb (Duration: 5.7ms | Allocations: 3664)
+Completed 200 OK in 10ms (Views: 7.0ms | ActiveRecord: 0.2ms | Allocations: 4937)
+
+
+Started GET "/planets/new" for 127.0.0.1 at 2023-01-28 11:55:58 -0500
+Processing by PlanetsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering planets/new.html.erb within layouts/application
+  Rendered planets/_form.html.erb (Duration: 4.3ms | Allocations: 2495)
+  Rendered planets/new.html.erb within layouts/application (Duration: 5.4ms | Allocations: 2785)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | Allocations: 5095)
+Completed 200 OK in 11ms (Views: 8.3ms | ActiveRecord: 0.4ms | Allocations: 6800)
+
+
+Started POST "/planets" for 127.0.0.1 at 2023-01-28 11:56:06 -0500
+Processing by PlanetsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "planet"=>{"name"=>"Jupiter"}, "commit"=>"Create Planet"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/planets_controller.rb:27:in `block in create'
+  [1m[36mPlanet Create (0.5ms)[0m  [1m[32mINSERT INTO "planets" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Jupiter"], ["created_at", "2023-01-28 16:56:06.415393"], ["updated_at", "2023-01-28 16:56:06.415393"]]
+  ↳ app/controllers/planets_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/planets_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/planets/1
+Completed 302 Found in 11ms (ActiveRecord: 4.2ms | Allocations: 3755)
+
+
+Started GET "/planets/1" for 127.0.0.1 at 2023-01-28 11:56:06 -0500
+Processing by PlanetsController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mPlanet Load (0.2ms)[0m  [1m[34mSELECT "planets".* FROM "planets" WHERE "planets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/planets_controller.rb:63:in `set_planet'
+  Rendering layout layouts/application.html.erb
+  Rendering planets/show.html.erb within layouts/application
+  Rendered planets/_planet.html.erb (Duration: 0.4ms | Allocations: 138)
+  Rendered planets/show.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1206)
+  Rendered layout layouts/application.html.erb (Duration: 5.7ms | Allocations: 3505)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.2ms | Allocations: 6253)
+
+
+Started GET "/planets" for 127.0.0.1 at 2023-01-28 11:56:09 -0500
+Processing by PlanetsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering planets/index.html.erb within layouts/application
+  [1m[36mPlanet Load (0.1ms)[0m  [1m[34mSELECT "planets".* FROM "planets"[0m
+  ↳ app/views/planets/index.html.erb:6
+  Rendered planets/_planet.html.erb (Duration: 0.1ms | Allocations: 17)
+  Rendered planets/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 898)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | Allocations: 3092)
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.1ms | Allocations: 3377)
+
+
+Started GET "/planets/new" for 127.0.0.1 at 2023-01-28 11:56:10 -0500
+Processing by PlanetsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering planets/new.html.erb within layouts/application
+  Rendered planets/_form.html.erb (Duration: 1.4ms | Allocations: 816)
+  Rendered planets/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 904)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | Allocations: 3096)
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.0ms | Allocations: 3378)
+
+
+Started POST "/planets" for 127.0.0.1 at 2023-01-28 11:56:20 -0500
+Processing by PlanetsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "planet"=>{"name"=>"Terra"}, "commit"=>"Create Planet"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/planets_controller.rb:27:in `block in create'
+  [1m[36mPlanet Create (0.3ms)[0m  [1m[32mINSERT INTO "planets" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Terra"], ["created_at", "2023-01-28 16:56:20.828001"], ["updated_at", "2023-01-28 16:56:20.828001"]]
+  ↳ app/controllers/planets_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/planets_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/planets/2
+Completed 302 Found in 10ms (ActiveRecord: 4.3ms | Allocations: 2311)
+
+
+Started GET "/planets/2" for 127.0.0.1 at 2023-01-28 11:56:20 -0500
+Processing by PlanetsController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mPlanet Load (0.2ms)[0m  [1m[34mSELECT "planets".* FROM "planets" WHERE "planets"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/planets_controller.rb:63:in `set_planet'
+  Rendering layout layouts/application.html.erb
+  Rendering planets/show.html.erb within layouts/application
+  Rendered planets/_planet.html.erb (Duration: 0.1ms | Allocations: 17)
+  Rendered planets/show.html.erb within layouts/application (Duration: 1.1ms | Allocations: 576)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | Allocations: 2760)
+Completed 200 OK in 6ms (Views: 4.2ms | ActiveRecord: 0.2ms | Allocations: 3495)
+
+
+Started GET "/planets" for 127.0.0.1 at 2023-01-28 11:56:22 -0500
+Processing by PlanetsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering planets/index.html.erb within layouts/application
+  [1m[36mPlanet Load (0.2ms)[0m  [1m[34mSELECT "planets".* FROM "planets"[0m
+  ↳ app/views/planets/index.html.erb:6
+  Rendered planets/_planet.html.erb (Duration: 0.1ms | Allocations: 17)
+  Rendered planets/_planet.html.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered planets/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 1000)
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | Allocations: 3192)
+Completed 200 OK in 9ms (Views: 8.2ms | ActiveRecord: 0.2ms | Allocations: 3462)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePowers (20230128165744)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "powers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230128165744"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/power" for 127.0.0.1 at 2023-01-28 11:58:31 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/power"):
+  
+Started GET "/powers" for 127.0.0.1 at 2023-01-28 11:58:39 -0500
+Processing by PowersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering powers/index.html.erb within layouts/application
+  [1m[36mPower Load (0.2ms)[0m  [1m[34mSELECT "powers".* FROM "powers"[0m
+  ↳ app/views/powers/index.html.erb:6
+  Rendered powers/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 1321)
+  Rendered layout layouts/application.html.erb (Duration: 44.1ms | Allocations: 36304)
+Completed 200 OK in 51ms (Views: 45.4ms | ActiveRecord: 0.2ms | Allocations: 39113)
+
+
+Started GET "/powers/new" for 127.0.0.1 at 2023-01-28 11:58:42 -0500
+Processing by PowersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering powers/new.html.erb within layouts/application
+  Rendered powers/_form.html.erb (Duration: 4.5ms | Allocations: 2515)
+  Rendered powers/new.html.erb within layouts/application (Duration: 5.3ms | Allocations: 2830)
+  Rendered layout layouts/application.html.erb (Duration: 8.6ms | Allocations: 5145)
+Completed 200 OK in 16ms (Views: 9.2ms | ActiveRecord: 0.5ms | Allocations: 9072)
+
+
+Started POST "/powers" for 127.0.0.1 at 2023-01-28 11:58:47 -0500
+Processing by PowersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "power"=>{"name"=>"Lazer"}, "commit"=>"Create Power"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/powers_controller.rb:27:in `block in create'
+  [1m[36mPower Create (0.4ms)[0m  [1m[32mINSERT INTO "powers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Lazer"], ["created_at", "2023-01-28 16:58:47.809821"], ["updated_at", "2023-01-28 16:58:47.809821"]]
+  ↳ app/controllers/powers_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/powers_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/powers/1
+Completed 302 Found in 9ms (ActiveRecord: 4.1ms | Allocations: 3768)
+
+
+Started GET "/powers/1" for 127.0.0.1 at 2023-01-28 11:58:47 -0500
+Processing by PowersController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mPower Load (0.3ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:63:in `set_power'
+  Rendering layout layouts/application.html.erb
+  Rendering powers/show.html.erb within layouts/application
+  Rendered powers/_power.html.erb (Duration: 0.7ms | Allocations: 177)
+  Rendered powers/show.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1431)
+  Rendered layout layouts/application.html.erb (Duration: 9.0ms | Allocations: 3732)
+Completed 200 OK in 16ms (Views: 10.1ms | ActiveRecord: 0.3ms | Allocations: 6515)
+
+
+Started GET "/powers" for 127.0.0.1 at 2023-01-28 11:58:49 -0500
+Processing by PowersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering powers/index.html.erb within layouts/application
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers"[0m
+  ↳ app/views/powers/index.html.erb:6
+  Rendered powers/_power.html.erb (Duration: 0.1ms | Allocations: 17)
+  Rendered powers/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1011)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 3206)
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.1ms | Allocations: 3521)
+
+
+Started GET "/powers/new" for 127.0.0.1 at 2023-01-28 11:58:51 -0500
+Processing by PowersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering powers/new.html.erb within layouts/application
+  Rendered powers/_form.html.erb (Duration: 1.6ms | Allocations: 834)
+  Rendered powers/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 922)
+  Rendered layout layouts/application.html.erb (Duration: 4.8ms | Allocations: 3114)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.0ms | Allocations: 3391)
+
+
+Started POST "/powers" for 127.0.0.1 at 2023-01-28 11:58:58 -0500
+Processing by PowersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "power"=>{"name"=>"Forca"}, "commit"=>"Create Power"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/powers_controller.rb:27:in `block in create'
+  [1m[36mPower Create (0.3ms)[0m  [1m[32mINSERT INTO "powers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Forca"], ["created_at", "2023-01-28 16:58:58.541918"], ["updated_at", "2023-01-28 16:58:58.541918"]]
+  ↳ app/controllers/powers_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/powers_controller.rb:27:in `block in create'
+Redirected to http://127.0.0.1:3000/powers/2
+Completed 302 Found in 10ms (ActiveRecord: 4.2ms | Allocations: 2324)
+
+
+Started GET "/powers/2" for 127.0.0.1 at 2023-01-28 11:58:58 -0500
+Processing by PowersController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mPower Load (0.3ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:63:in `set_power'
+  Rendering layout layouts/application.html.erb
+  Rendering powers/show.html.erb within layouts/application
+  Rendered powers/_power.html.erb (Duration: 0.1ms | Allocations: 17)
+  Rendered powers/show.html.erb within layouts/application (Duration: 1.7ms | Allocations: 580)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | Allocations: 2764)
+Completed 200 OK in 7ms (Views: 4.8ms | ActiveRecord: 0.3ms | Allocations: 3508)
+
+
+Started GET "/powers" for 127.0.0.1 at 2023-01-28 11:59:01 -0500
+Processing by PowersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering powers/index.html.erb within layouts/application
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers"[0m
+  ↳ app/views/powers/index.html.erb:6
+  Rendered powers/_power.html.erb (Duration: 0.1ms | Allocations: 17)
+  Rendered powers/_power.html.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered powers/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1016)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | Allocations: 3208)
+Completed 200 OK in 9ms (Views: 8.8ms | ActiveRecord: 0.1ms | Allocations: 3478)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPlanetToAlien (20230128170129)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aaliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aliens"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aliens"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "aliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "planet_id" integer NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "aliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aaliens"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+Started GET "/powers" for 127.0.0.1 at 2023-01-28 12:03:26 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+You have 1 pending migration:
+
+20230128170129_add_planet_to_alien.rb
+
+
+):
+  
+activerecord (7.0.4.2) lib/active_record/migration.rb:627:in `check_pending!'
+activerecord (7.0.4.2) lib/active_record/migration.rb:592:in `block (2 levels) in call'
+activesupport (7.0.4.2) lib/active_support/file_update_checker.rb:83:in `execute'
+activerecord (7.0.4.2) lib/active_record/migration.rb:597:in `block in call'
+activerecord (7.0.4.2) lib/active_record/migration.rb:589:in `synchronize'
+activerecord (7.0.4.2) lib/active_record/migration.rb:589:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4.2) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.6.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.6.2) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.6.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPlanetToAlien (20230128170129)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aaliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aliens"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aliens"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "aliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "planet_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "aliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aaliens"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPlanetToAlien (20230128170129)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aaliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aliens"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aliens"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "aliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "planet_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "aliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aaliens"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+Started POST "/rails/actions" for 127.0.0.1 at 2023-01-28 12:19:01 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPlanetToAlien (20230128170129)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aaliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aliens"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aliens"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "aliens" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "age" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "planet_id" integer NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "aliens" ("id","name","age","created_at","updated_at")
+                     SELECT "id","name","age","created_at","updated_at" FROM "aaliens"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  
+StandardError (An error has occurred, this and all later migrations canceled:
+
+SQLite3::ConstraintException: NOT NULL constraint failed: aliens.planet_id):
+  
+sqlite3-1.6.0-x86_64 (linux) lib/sqlite3/statement.rb:108:in `step'
+sqlite3-1.6.0-x86_64 (linux) lib/sqlite3/statement.rb:108:in `block in each'
+sqlite3-1.6.0-x86_64 (linux) lib/sqlite3/statement.rb:107:in `loop'
+sqlite3-1.6.0-x86_64 (linux) lib/sqlite3/statement.rb:107:in `each'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3/database_statements.rb:56:in `to_a'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3/database_statements.rb:56:in `block (2 levels) in exec_query'
+activesupport (7.0.4.2) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (7.0.4.2) lib/active_support/dependencies/interlock.rb:41:in `permit_concurrent_loads'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3/database_statements.rb:47:in `block in exec_query'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract_adapter.rb:765:in `block in log'
+activesupport (7.0.4.2) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract_adapter.rb:756:in `log'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3/database_statements.rb:46:in `exec_query'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:538:in `copy_table_contents'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:496:in `copy_table'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:461:in `move_table'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:455:in `block (2 levels) in alter_table'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:207:in `disable_referential_integrity'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:453:in `block in alter_table'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/database_statements.rb:314:in `transaction'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:452:in `alter_table'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:246:in `add_column'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/schema_definitions.rb:629:in `column'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/schema_definitions.rb:176:in `block in add_to'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/schema_definitions.rb:175:in `each'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/schema_definitions.rb:175:in `add_to'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/schema_statements.rb:989:in `add_reference'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/sqlite3_adapter.rb:304:in `add_reference'
+activerecord (7.0.4.2) lib/active_record/migration.rb:932:in `block in method_missing'
+activerecord (7.0.4.2) lib/active_record/migration.rb:900:in `block in say_with_time'
+/usr/lib/ruby/3.1.0/benchmark.rb:296:in `measure'
+activerecord (7.0.4.2) lib/active_record/migration.rb:900:in `say_with_time'
+activerecord (7.0.4.2) lib/active_record/migration.rb:921:in `method_missing'
+db/migrate/20230128170129_add_planet_to_alien.rb:3:in `change'
+activerecord (7.0.4.2) lib/active_record/migration.rb:870:in `exec_migration'
+activerecord (7.0.4.2) lib/active_record/migration.rb:854:in `block (2 levels) in migrate'
+/usr/lib/ruby/3.1.0/benchmark.rb:296:in `measure'
+activerecord (7.0.4.2) lib/active_record/migration.rb:853:in `block in migrate'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:215:in `with_connection'
+activerecord (7.0.4.2) lib/active_record/migration.rb:852:in `migrate'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1046:in `migrate'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1360:in `block in execute_migration_in_transaction'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/transaction.rb:319:in `block in within_new_transaction'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (7.0.4.2) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/transaction.rb:317:in `within_new_transaction'
+activerecord (7.0.4.2) lib/active_record/connection_adapters/abstract/database_statements.rb:316:in `transaction'
+activerecord (7.0.4.2) lib/active_record/transactions.rb:209:in `transaction'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1411:in `ddl_transaction'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1359:in `execute_migration_in_transaction'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1333:in `each'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1333:in `migrate_without_lock'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1284:in `migrate'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1117:in `up'
+activerecord (7.0.4.2) lib/active_record/migration.rb:1092:in `migrate'
+activerecord (7.0.4.2) lib/active_record/tasks/database_tasks.rb:262:in `migrate'
+activerecord (7.0.4.2) lib/active_record/migration.rb:137:in `block in <class:PendingMigrationError>'
+activesupport (7.0.4.2) lib/active_support/actionable_error.rb:28:in `dispatch'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/actionable_exceptions.rb:19:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4.2) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.6.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.6.2) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.6.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2/trace" for 127.0.0.1 at 2023-01-28 12:21:21 -0500
+Started POST "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2/trace" for 127.0.0.1 at 2023-01-28 12:21:23 -0500
+Started POST "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2/trace" for 127.0.0.1 at 2023-01-28 12:21:24 -0500
+Started POST "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2/trace" for 127.0.0.1 at 2023-01-28 12:21:26 -0500
+Started PUT "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2" for 127.0.0.1 at 2023-01-28 12:21:35 -0500
+Started PUT "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2" for 127.0.0.1 at 2023-01-28 12:21:40 -0500
+Started PUT "/__web_console/repl_sessions/cd6a973aace8e881b5d9bbeabfaadef2" for 127.0.0.1 at 2023-01-28 12:21:40 -0500
+Started GET "/powers" for 127.0.0.1 at 2023-01-28 12:22:42 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+You have 1 pending migration:
+
+20230128170129_add_planet_to_alien.rb
+
+
+):
+  
+activerecord (7.0.4.2) lib/active_record/migration.rb:627:in `check_pending!'
+activerecord (7.0.4.2) lib/active_record/migration.rb:592:in `block (2 levels) in call'
+activesupport (7.0.4.2) lib/active_support/file_update_checker.rb:83:in `execute'
+activerecord (7.0.4.2) lib/active_record/migration.rb:597:in `block in call'
+activerecord (7.0.4.2) lib/active_record/migration.rb:589:in `synchronize'
+activerecord (7.0.4.2) lib/active_record/migration.rb:589:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4.2) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.6.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.6.2) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.6.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2023-01-28 12:24:59 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+You have 1 pending migration:
+
+20230128170129_add_planet_to_alien.rb
+
+
+):
+  
+activerecord (7.0.4.2) lib/active_record/migration.rb:627:in `check_pending!'
+activerecord (7.0.4.2) lib/active_record/migration.rb:592:in `block (2 levels) in call'
+activesupport (7.0.4.2) lib/active_support/file_update_checker.rb:83:in `execute'
+activerecord (7.0.4.2) lib/active_record/migration.rb:597:in `block in call'
+activerecord (7.0.4.2) lib/active_record/migration.rb:589:in `synchronize'
+activerecord (7.0.4.2) lib/active_record/migration.rb:589:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4.2) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4.2) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.6.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.6.2) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.6.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
